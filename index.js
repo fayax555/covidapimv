@@ -42,7 +42,7 @@ let covidDataJson = '';
    ];
    covidjson = JSON.stringify(covidDataJson);
    app.get('/', (req, res) => {
-      res.send(JSON.stringify(covidjson));
+      res.send(covidjson);
    });
 
    app.listen(port, () => {
