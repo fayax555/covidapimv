@@ -3,52 +3,60 @@ const puppeteer = require('puppeteer');
 const app = express();
 const port = process.env.PORT || 3000;
 
-async function scrapingData(url) {
-   const browser = await puppeteer.launch();
-   const page = await browser.newPage();
+app.get('', (req, res) => {
+   res.send({ name: 'Fayaz' });
+});
 
-   await page.goto(url, {
-      waitUntil: 'networkidle0',
-      timeout: 0,
-   });
+// async function scrapingData(url) {
+//    const browser = await puppeteer.launch();
+//    const page = await browser.newPage();
 
-   // first col
-   let [totalCasesEl] = await page.$x('//*[@id="cases_total"]');
-   let [activeCasesEl] = await page.$x('//*[@id="cases_active"]');
-   let [recoveriesEl] = await page.$x('//*[@id="cases_recovered"]');
-   let [totalDeathsEl] = await page.$x('//*[@id="cases_deaths"]');
+//    await page.goto(url, {
+//       waitUntil: 'networkidle0',
+//       timeout: 0,
+//    });
 
-   const totalCasesJson = await (
-      await totalCasesEl.getProperty('textContent')
-   ).jsonValue();
-   const activeCasesJson = await (
-      await activeCasesEl.getProperty('textContent')
-   ).jsonValue();
-   const recoveriesJson = await (
-      await recoveriesEl.getProperty('textContent')
-   ).jsonValue();
-   const totalDeathsJson = await (
-      await totalDeathsEl.getProperty('textContent')
-   ).jsonValue();
+//    // first col
+//    let [totalCasesEl] = await page.$x('//*[@id="cases_total"]');
+//    let [activeCasesEl] = await page.$x('//*[@id="cases_active"]');
+//    let [recoveriesEl] = await page.$x('//*[@id="cases_recovered"]');
+//    let [totalDeathsEl] = await page.$x('//*[@id="cases_deaths"]');
 
-   const covidDataJson = [
-      {
-         total: totalCasesJson,
-         activeCases: activeCasesJson,
-         recoveries: recoveriesJson,
-         totalDeaths: totalDeathsJson,
-      },
-   ];
+//    const totalCasesJson = await (
+//       await totalCasesEl.getProperty('textContent')
+//    ).jsonValue();
+//    const activeCasesJson = await (
+//       await activeCasesEl.getProperty('textContent')
+//    ).jsonValue();
+//    const recoveriesJson = await (
+//       await recoveriesEl.getProperty('textContent')
+//    ).jsonValue();
+//    const totalDeathsJson = await (
+//       await totalDeathsEl.getProperty('textContent')
+//    ).jsonValue();
 
-   app.get('/', (req, res) => {
-      res.json(covidDataJson);
-   });
+//    const covidDataJson = [
+//       {
+//          total: totalCasesJson,
+//          activeCases: activeCasesJson,
+//          recoveries: recoveriesJson,
+//          totalDeaths: totalDeathsJson,
+//       },
+//    ];
 
-   app.listen(port, () => {
-      console.log(`port listening on http://localhost:${port}`);
-   });
+//    // app.get('/', (req, res) => {
+//    //    res.json(covidDataJson);
+//    // });
 
-   browser.close();
-}
+//    // app.listen(port, () => {
+//    //    console.log(`port listening on http://localhost:${port}`);
+//    // });
 
-scrapingData('https://covid19.health.gov.mv/en/?c=0');
+//    browser.close();
+// }
+
+// scrapingData('https://covid19.health.gov.mv/en/?c=0');
+
+app.listen(port, () => {
+   console.log(`port listening on http://localhost:${port}`);
+});
