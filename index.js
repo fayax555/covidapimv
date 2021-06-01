@@ -4,7 +4,9 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get('/', async (req, res) => {
-   const browser = await puppeteer.launch();
+   const browser = await puppeteer.launch({
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+   });
    const page = await browser.newPage();
 
    await page.goto('https://covid19.health.gov.mv/en/?c=0', {
