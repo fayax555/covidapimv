@@ -1,14 +1,13 @@
 const express = require('express');
 const puppeteer = require('puppeteer');
 const app = express();
-let port = process.env.PORT || 3000;
-let covidDataJson = '';
+const port = process.env.PORT || 3000;
 
-(async () => {
+async function scrapingData(url) {
    const browser = await puppeteer.launch();
    const page = await browser.newPage();
 
-   await page.goto('https://covid19.health.gov.mv/en/?c=0', {
+   await page.goto(url, {
       waitUntil: 'networkidle0',
       timeout: 0,
    });
@@ -32,7 +31,7 @@ let covidDataJson = '';
       await totalDeathsEl.getProperty('textContent')
    ).jsonValue();
 
-   covidDataJson = [
+   const covidDataJson = [
       {
          total: totalCasesJson,
          activeCases: activeCasesJson,
@@ -40,9 +39,9 @@ let covidDataJson = '';
          totalDeaths: totalDeathsJson,
       },
    ];
-   covidjson = JSON.stringify(covidDataJson);
+
    app.get('/', (req, res) => {
-      res.send(covidjson);
+      res.json(covidDataJson);
    });
 
    app.listen(port, () => {
@@ -50,4 +49,6 @@ let covidDataJson = '';
    });
 
    browser.close();
-})();
+}
+
+scrapingData('https://covid19.health.gov.mv/en/?c=0');
