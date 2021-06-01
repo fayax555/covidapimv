@@ -1,0 +1,28 @@
+{
+   "name": "covidapimv",
+   "version": "1.0.0",
+   "description": "",
+   "main": "scrape.js",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node index.js"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/fayax555/covidapimv.git"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "bugs": {
+      "url": "https://github.com/fayax555/covidapimv/issues"
+   },
+   "homepage": "https://github.com/fayax555/covidapimv#readme",
+   "dependencies": {
+      "express": "^4.17.1",
+      "puppeteer": "^10.0.0"
+   },
+   "engines": {
+      "node": "16.1.0"
+   }
+}
