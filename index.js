@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 const app = express();
 const port = process.env.PORT || 3000;
 
-(async () => {
+app.get('/', async (req, res) => {
    const browser = await puppeteer.launch();
    const page = await browser.newPage();
 
@@ -41,10 +41,15 @@ const port = process.env.PORT || 3000;
    ];
    await browser.close();
 
-   app.get('/', (req, res) => {
-      res.json(covidDataJson);
-   });
-})();
+   res.json(covidDataJson);
+});
+
+// (async () => {
+
+//    app.get('/data', (req, res) => {
+//       res.json(covidDataJson);
+//    });
+// })();
 
 app.listen(port, () => {
    console.log(`port listening on http://localhost:${port}`);
