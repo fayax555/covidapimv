@@ -52,14 +52,13 @@ app.get('/', async (req, res) => {
       await totalDeathsEl.getProperty('textContent')
    ).jsonValue();
 
-   const covidDataJson = [
-      {
-         total: totalCasesJson,
-         activeCases: activeCasesJson,
-         recoveries: recoveriesJson,
-         totalDeaths: totalDeathsJson,
-      },
-   ];
+   const covidDataJson = {
+      total: totalCasesJson,
+      activeCases: activeCasesJson,
+      recoveries: recoveriesJson,
+      totalDeaths: totalDeathsJson,
+   };
+
    await browser.close();
 
    res.json(covidDataJson);
