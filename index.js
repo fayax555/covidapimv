@@ -100,9 +100,15 @@ app.get('/mihaaru', async (req, res) => {
             const isolated = items[12];
             const vaccinated = items[13];
 
-            // console.log(items);
-            // console.log();
+            let dateEl = [];
+            $('.text-14px').each((i, el) => {
+               dateEl.push($(el).text().replace(/\s\s+/g, ''));
+            });
+
+            const date = dateEl[1];
+
             res.json({
+               date,
                wTotal,
                wRecovered,
                wActive,

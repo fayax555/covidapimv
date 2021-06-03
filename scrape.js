@@ -10,6 +10,12 @@ request('https://mihaaru.com/covid_19?ref=mhr-mn', (error, response, html) => {
          items.push(item);
       });
 
+      let dateEl = [];
+      $('.text-14px').each((i, el) => {
+         dateEl.push($(el).text().replace(/\s\s+/g, ''));
+      });
+      console.log(dateEl[1]);
+
       // Worldwide
       const wTotal = items[1];
       const wRecovered = items[2];
@@ -25,21 +31,5 @@ request('https://mihaaru.com/covid_19?ref=mhr-mn', (error, response, html) => {
       const hospitalized = items[11];
       const isolated = items[12];
       const vaccinated = items[13];
-
-      // console.log(items);
-      console.log({
-         wTotal,
-         wRecovered,
-         wActive,
-         wDeaths,
-         newCases,
-         total,
-         recovered,
-         active,
-         deaths,
-         hospitalized,
-         isolated,
-         vaccinated,
-      });
    }
 });
