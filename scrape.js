@@ -1,32 +1,45 @@
-// const puppeteer = require('puppeteer');
+const request = require('request');
+const cheerio = require('cheerio');
 
-// (async () => {
-//    const browser = await puppeteer.launch();
-//    const page = await browser.newPage();
+request('https://mihaaru.com/covid_19?ref=mhr-mn', (error, response, html) => {
+   if (!error && response.statusCode == 200) {
+      const $ = cheerio.load(html);
+      const items = [];
+      $('.text-lg').each((i, el) => {
+         const item = $(el).text();
+         items.push(item);
+      });
 
-//    await page.goto('https://covid19.health.gov.mv/en/?c=0', {
-//       waitUntil: 'networkidle0',
-//       timeout: 0,
-//    });
+      // Worldwide
+      const wTotal = items[1];
+      const wRecovered = items[2];
+      const wActive = items[3];
+      const wDeaths = items[4];
 
-//    // first col
-//    let [totalCasesEl] = await page.$x('//*[@id="cases_total"]');
-//    let [activeCasesEl] = await page.$x('//*[@id="cases_active"]');
-//    let [recoveriesEl] = await page.$x('//*[@id="cases_recovered"]');
-//    let [totalDeathsEl] = await page.$x('//*[@id="cases_deaths"]');
+      // Maldives
+      const newCases = items[6];
+      const total = items[7];
+      const recovered = items[8];
+      const active = items[9];
+      const deaths = items[10];
+      const hospitalized = items[11];
+      const isolated = items[12];
+      const vaccinated = items[13];
 
-//    const totalCasesJson = await (
-//       await totalCasesEl.getProperty('textContent')
-//    ).jsonValue();
-//    const activeCasesJson = await (
-//       await activeCasesEl.getProperty('textContent')
-//    ).jsonValue();
-//    const recoveriesJson = await (
-//       await recoveriesEl.getProperty('textContent')
-//    ).jsonValue();
-//    const totalDeathsJson = await (
-//       await totalDeathsEl.getProperty('textContent')
-//    ).jsonValue();
-
-//    browser.close();
-// })();
+      // console.log(items);
+      console.log({
+         wTotal,
+         wRecovered,
+         wActive,
+         wDeaths,
+         newCases,
+         total,
+         recovered,
+         active,
+         deaths,
+         hospitalized,
+         isolated,
+         vaccinated,
+      });
+   }
+});

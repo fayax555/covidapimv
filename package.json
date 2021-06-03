@@ -18,8 +18,10 @@
    },
    "homepage": "https://github.com/fayax555/covidapimv#readme",
    "dependencies": {
+      "cheerio": "*",
       "express": "^4.17.1",
-      "puppeteer": "^10.0.0"
+      "puppeteer": "^10.0.0",
+      "request": "^2.88.2"
    },
    "engines": {
       "node": "16.1.0"
