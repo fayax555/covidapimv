@@ -1,5 +1,5 @@
 const express = require('express');
-const puppeteer = require('puppeteer');
+// const puppeteer = require('puppeteer');
 const request = require('request');
 const cheerio = require('cheerio');
 const app = express();
@@ -105,7 +105,7 @@ app.get('/mihaaru', async (req, res) => {
                dateEl.push($(el).text().replace(/\s\s+/g, ''));
             });
 
-            const date = dateEl[1];
+            const date = dateEl[4];
 
             res.json({
                date,
