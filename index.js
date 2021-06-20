@@ -84,21 +84,23 @@ app.get('/mihaaru', async (req, res) => {
                items.push(item);
             });
 
-            // Worldwide
-            const wTotal = items[1];
-            const wRecovered = items[2];
-            const wActive = items[3];
-            const wDeaths = items[4];
-
-            // Maldives
-            const newCases = items[6];
-            const total = items[7];
-            const recovered = items[8];
-            const active = items[9];
-            const deaths = items[10];
-            const hospitalized = items[11];
-            const isolated = items[12];
-            const vaccinated = items[13];
+            // w - Worldwide, rest - Maldives
+            const [
+               ,
+               wTotal,
+               wRecovered,
+               wActive,
+               wDeaths,
+               ,
+               newCases,
+               total,
+               recovered,
+               active,
+               deaths,
+               hospitalized,
+               isolated,
+               vaccinated,
+            ] = items;
 
             let dateEl = [];
             $('.text-14px').each((i, el) => {
